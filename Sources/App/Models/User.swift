@@ -8,7 +8,6 @@
 import FluentPostgreSQL
 import Vapor
 
-/// A single entry of a Todo list.
 final class User: PostgreSQLUUIDModel {
     var id: UUID?
     var name: String
