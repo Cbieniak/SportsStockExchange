@@ -23,3 +23,9 @@ final class Sport: PostgreSQLUUIDModel {
 extension Sport: Migration { }
 extension Sport: Content { }
 extension Sport: Parameter { }
+
+extension Sport {
+    var leagues: Children<Sport, League> {
+        return children(\.sportId)
+    }
+}
