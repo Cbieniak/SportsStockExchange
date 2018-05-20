@@ -18,13 +18,9 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     services.register(middlewares)
     
     // Configure a SQLite database
-    let config = PostgreSQLDatabaseConfig(hostname: "localhost",
-                                          port: 5432,
-                                          username: "postgres",
-                                          database: "postgres",
-                                          password: "admin")
+
     
-    let postgres = PostgreSQLDatabase(config: config)
+    let postgres = PostgreSQLDatabase(config: setupDatabaseConfig(env))
 
     /// Register the configured SQLite database to the database config.
     var databases = DatabasesConfig()
@@ -38,4 +34,22 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     migrations.add(migration: SeedSports.self, database: .psql)
     services.register(migrations)
 
+}
+
+func setupDatabaseConfig(_ environment: Environment) -> PostgreSQLDatabaseConfig {
+    
+    switch environment {
+    case Environment.testing:
+        return PostgreSQLDatabaseConfig(hostname: "localhost",
+                                              port: 5432,
+                                              username: "postgres",
+                                              database: "Test",
+                                              password: "admin")
+    default:
+        return PostgreSQLDatabaseConfig(hostname: "localhost",
+                                              port: 5432,
+                                              username: "postgres",
+                                              database: "t2",
+                                              password: "admin")
+    }
 }
