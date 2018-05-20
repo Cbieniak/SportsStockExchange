@@ -6,8 +6,8 @@ public func routes(_ router: Router) throws {
     router.get("hello") { req in
         return "Hello, world!"
     }
-    router.group("api") { (router) in
-        router.group("v1") { (router) in
+    router.group(RouteConstants.api) { (router) in
+        router.group(RouteConstants.versionOne) { (router) in
             let userController = UserController()
             router.get("users", use: userController.index)
             router.post("users", use: userController.create)

@@ -17,9 +17,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
     services.register(middlewares)
     
-    // Configure a SQLite database
-
-    
+    // Configure a Postgres database
     let postgres = PostgreSQLDatabase(config: setupDatabaseConfig(env))
 
     /// Register the configured SQLite database to the database config.
