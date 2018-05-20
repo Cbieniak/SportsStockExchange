@@ -6,13 +6,16 @@ public func routes(_ router: Router) throws {
     router.get("hello") { req in
         return "Hello, world!"
     }
-
-    // Example of configuring a controller
-    let userController = UserController()
-    router.get("users", use: userController.index)
-    router.post("users", use: userController.create)
-    router.delete("users", User.parameter, use: userController.delete)
+    router.group("api") { (router) in
+        router.group("v1") { (router) in
+            let userController = UserController()
+            router.get("users", use: userController.index)
+            router.post("users", use: userController.create)
+            router.delete("users", User.parameter, use: userController.delete)
+            
+            let sportsController = SportController()
+            router.get("sports", use: sportsController.index)
+        }
+    }
     
-    let sportsController = SportController()
-    router.get("sports", use: sportsController.index)
 }
