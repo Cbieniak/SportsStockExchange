@@ -12,6 +12,6 @@ struct RouteConstants {
     static var versionOne = "v1"
     
     static var currentApi: String {
-        return "\\" + RouteConstants.api + "\\" + RouteConstants.versionOne
+        return "/\(RouteConstants.api)/\(RouteConstants.versionOne)/"
     }
 }
